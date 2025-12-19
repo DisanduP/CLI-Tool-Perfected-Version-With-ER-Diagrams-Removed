@@ -1,123 +1,116 @@
-# Diagram Converter Tool - Flowchart Perfected
+# Diagram Converter Tool 🎨🛠️ | Flowchart Perfected
 
-A powerful command-line tool for converting Mermaid diagrams to Draw.io XML format and generating Markdown documentation. Perfect for developers who want to automate diagram creation and documentation.
+![Build](https://img.shields.io/github/actions/workflow/status/DisanduP/CLI-Tool-Perfected-Version-With-ER-Diagrams-Removed/ci.yml?branch=main)
+![npm](https://img.shields.io/npm/v/diagram-converter)
+![License](https://img.shields.io/github/license/DisanduP/CLI-Tool-Perfected-Version-With-ER-Diagrams-Removed)
 
-## Features
+> 🚀 **Convert Mermaid diagrams to Draw.io XML and Markdown docs—automated, beautiful, and fast!**
 
-- **Mermaid to Draw.io Conversion**: Convert Mermaid flowcharts, sequence diagrams, and mindmaps to editable Draw.io XML files.
-- **Markdown Documentation**: Generate structured Markdown documentation from your diagrams.
-- **Advanced Layout Engine**: Uses Dagre for professional graph layout, ensuring clean, non-overlapping diagrams with optimal edge routing.
-- **Multiple Diagram Types**: Supports flowcharts (with complex branches and cycles), sequence diagrams, and mindmaps.
-- **Command-Line Interface**: Easy to integrate into build processes, CI/CD pipelines, or documentation workflows.
+---
 
-## Recent Improvements
+## 📖 Table of Contents
 
-- **Dagre Integration**: Replaced custom layout algorithm with Dagre for better node positioning and edge routing in flowcharts.
-- **Edge Routing**: Automatic edge routing that avoids crossing nodes, using Dagre's calculated paths.
-- **Enhanced Flowchart Support**: Handles complex flowcharts with branches, merges, cycles, and decision points perfectly.
-- **Fallback Logic**: Maintains compatibility with existing diagrams while improving layout quality.
+- [Features](#features)
+- [Recent Improvements](#recent-improvements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Supported Diagram Types](#supported-diagram-types)
+- [Output Formats](#output-formats)
+- [File Structure](#file-structure)
+- [How It Works](#how-it-works)
+- [Advanced Features](#advanced-features)
+- [Programmatic Usage](#programmatic-usage)
+- [Conversion Rules](#conversion-rules)
+- [Limitations](#limitations)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
 
-## Installation
+---
 
-1. **Prerequisites**:
-   - Node.js (v14 or higher)
-   - npm
+## ✨ Features
 
-2. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/DisanduP/Diagram-Converter-Tool-Flowchart-Perfected.git
-   cd Diagram-Converter-Tool-Flowchart-Perfected
-   ```
+- ⚡ **Mermaid → Draw.io**: Convert Mermaid diagrams (flowcharts, sequences, mindmaps) to editable Draw.io XML.
+- 📝 **Markdown Docs**: Auto-generate clear Markdown documentation.
+- 🧠 **Dagre-powered Layout**: Professional graph layout with clean edge routing.
+- 🔄 **Multi-Diagram Support**: Handles branches, cycles, merges, and decision points.
+- 🚀 **CLI Integration**: Plug into build, CI/CD, or doc workflows.
 
-3. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
+---
 
-## Usage
+## 🚀 Recent Improvements
 
-### Basic Commands
+- 🛰️ **Dagre Integration**: Replaced custom layouts for smarter node positioning.
+- ↔️ **Smart Edge Routing**: Edges avoid crossing nodes.
+- 🪄 **Flowchart Upgrades**: Handles complex logic perfectly.
+- 🔒 **Backward Compatibility**: Your old diagrams still work!
+
+---
+
+<details>
+  <summary><b>🛠️ Installation</b></summary>
+
+```bash
+# Prerequisites:
+node -v # Node.js v14+
+npm -v
+
+# Clone & Install:
+git clone https://github.com/DisanduP/Diagram-Converter-Tool-Flowchart-Perfected.git
+cd Diagram-Converter-Tool-Flowchart-Perfected
+npm install
+```
+</details>
+
+---
+
+## 💻 Usage
+
+<details>
+  <summary><b>Basic CLI Commands</b></summary>
 
 ```bash
 # Convert Mermaid to Draw.io XML
 node diagram-cli.js to-drawio your-diagram.mmd
 
-# Generate Markdown documentation
+# Generate Markdown
 node diagram-cli.js to-markdown your-diagram.mmd
 
-# Full conversion (both Draw.io XML and Markdown)
+# Full conversion
 node diagram-cli.js convert your-diagram.mmd
 
 # Validate Mermaid syntax
 node diagram-cli.js validate your-diagram.mmd
 ```
+</details>
 
-### Command Options
-
-#### Convert to Draw.io
+<details>
+  <summary><b>Advanced CLI Options</b></summary>
 
 ```bash
 node diagram-cli.js to-drawio <file.mmd> [options]
+
+# Options:
+-d, --output-dir <dir>    Output directory (default: current)
+-n, --name <name>         Diagram name
+-q, --quiet               Suppress info messages
 ```
+</details>
 
-Options:
-- `-d, --output-dir <dir>` - Output directory (default: current)
-- `-n, --name <name>` - Diagram name
-- `-q, --quiet` - Suppress info messages
-
-#### Generate Markdown
+#### Examples
 
 ```bash
-node diagram-cli.js to-markdown <file.mmd> [options]
-```
-
-Options:
-- `-d, --output-dir <dir>` - Output directory (default: current)
-- `-n, --name <name>` - Diagram name
-- `-q, --quiet` - Suppress info messages
-
-#### Full Conversion
-
-```bash
-node diagram-cli.js convert <file.mmd> [options]
-```
-
-Options:
-- `-d, --output-dir <dir>` - Output directory (default: current)
-- `-n, --name <name>` - Diagram name
-- `-q, --quiet` - Suppress info messages
-
-#### Validate Mermaid
-
-```bash
-node diagram-cli.js validate <file.mmd> [--json]
-```
-
-Options:
-- `-o, --output <file>` - Output validation report as Markdown
-- `--json` - Output as JSON
-- `-q, --quiet` - Quiet mode, exit with code only
-
-### Examples
-
-```bash
-# Convert flowchart to Draw.io
 node diagram-cli.js to-drawio flowchart.mmd -o flowchart.drawio
-
-# Generate documentation
 node diagram-cli.js to-markdown sequence.mmd -o sequence-docs.md
-
-# Full conversion with all outputs
 node diagram-cli.js convert flowchart.mmd -d ./output
-
-# Validate before conversion
 node diagram-cli.js validate diagram.mmd --json
-
-# Read from stdin
 cat diagram.mmd | node diagram-cli.js to-drawio - -o output.drawio
 ```
 
-## Supported Diagram Types
+---
+
+## 🌈 Supported Diagram Types
 
 ### Flowcharts
 
@@ -131,13 +124,8 @@ flowchart TD
     Action2 --> End
 ```
 
-Supported shapes:
-- `[ ]` - Rectangle
-- `( )` - Rounded rectangle
-- `{ }` - Diamond (decision)
-- `[[ ]]` - Subroutine
-- `([ ])` - Stadium (terminal)
-- `(( ))` - Circle
+- `[ ]` Rectangle `( )` Rounded `{ }` Diamond `[[ ]]` Subroutine
+- `([ ])` Stadium `(( ))` Circle
 
 ### Sequence Diagrams
 
@@ -163,110 +151,122 @@ mindmap
         Detail 2.2.1
 ```
 
-## Output Formats
+---
+
+## 📦 Output Formats
 
 ### Draw.io XML
 
-The generated `.drawio` file can be:
-- Opened at [app.diagrams.net](https://app.diagrams.net)
-- Edited with the VS Code Draw.io extension
-- Imported into Confluence, Notion, etc.
+- Open in [app.diagrams.net](https://app.diagrams.net)
+- Edit with VS Code Draw.io extension
+- Import in tools (Confluence, Notion...)
 
 ### Markdown
 
-The generated Markdown includes:
-- Diagram overview and type
-- Entity/node table with shapes
-- Relationship/edge table
-- Subgraph documentation
-- Original Mermaid code for reference
+- Diagram overview & type
+- Node/shapes table
+- Relationship table
+- Subgraph docs
+- Mermaid code included
 
-## File Structure
+---
 
+## 🗂️ File Structure
+
+```text
+diagram-cli.js          # CLI interface
+mermaid-parser.js       # Mermaid parser
+drawio-converter.js     # Draw.io generator (Dagre-powered)
+markdown-converter.js   # Markdown generator
+index.js                # Entry point
+package.json            # Dependencies
 ```
-diagram-cli.js          # Main CLI interface
-mermaid-parser.js       # Mermaid syntax parser
-drawio-converter.js     # Draw.io XML generator with Dagre layout
-markdown-converter.js   # Markdown documentation generator
-index.js               # Entry point
-package.json           # Dependencies
-```
 
-## How It Works
+---
 
-1. **Parsing**: Reads and parses Mermaid syntax into structured data.
-2. **Layout**: Uses Dagre to calculate optimal node positions and edge routes.
-3. **Conversion**: Generates Draw.io XML with proper shapes, connections, and styling.
-4. **Documentation**: Creates Markdown files with diagram descriptions and flow explanations.
+## ⚙️ How It Works
 
-## Advanced Features
+1. **Parse:** Mermaid syntax → data structures.
+2. **Layout:** Dagre calculates coordinates.
+3. **Convert:** Output Draw.io XML.
+4. **Docs:** Auto-generate Markdown.
 
-- **Automatic Layout**: No manual positioning needed—Dagre handles it all.
-- **Edge Avoidance**: Edges route around nodes to prevent visual clutter.
-- **Shape Recognition**: Supports rectangles, diamonds (decisions), circles, and more.
-- **Label Support**: Preserves edge and node labels in the output.
+---
 
-## Programmatic Usage
+## 🦾 Advanced Features
 
-You can also use the converter as a library:
+- 🟦 **Automatic Layout**
+- 🟩 **Edge Avoidance**
+- 🟨 **Shape Recognition**
+- 🟧 **Label Support**
 
-```javascript
+---
+
+## 🔥 Programmatic Usage
+
+```js
 const { parseMermaid, toDrawio, toMarkdown } = require('./diagram-converter');
 
 const mermaidCode = `
 flowchart TD
-    A[Start] --> B[End]
+  A[Start] --> B[End]
 `;
 
-// Parse
 const parsed = parseMermaid(mermaidCode);
-console.log(parsed.nodes); // [{id: 'A', label: 'Start', ...}, ...]
-
-// Convert to Draw.io XML
 const xml = toDrawio(parsed, { name: 'My Diagram' });
-
-// Convert to Markdown
 const markdown = toMarkdown(parsed, mermaidCode);
 ```
 
-## Conversion Rules
+---
 
-The CLI follows the BMAD Diagram Converter agent's ruleset:
+## 📜 Conversion Rules
 
-1. **Node IDs**: Alphanumeric with underscores only
-2. **Arrows**: Simple arrows (`-->`, `---`)
-3. **Direction**: TD, LR, RL, BT
-4. **Grid alignment**: Coordinates rounded to multiples of 10
-5. **Unique IDs**: All Draw.io elements have unique IDs
+> Follows the BMAD Diagram Converter agent's ruleset:
 
-## Limitations
-
-- Complex styling (classDef, style) is not preserved in Draw.io
-- Some advanced Mermaid features may not convert perfectly
-- Chained arrows should be split into separate lines for best results
-
-## Troubleshooting
-
-- **Installation Issues**: Ensure Node.js and npm are installed. Run `npm install` in the project directory.
-- **Conversion Errors**: Check Mermaid syntax with `validate` command.
-- **Layout Problems**: For very complex diagrams, try simplifying or breaking into smaller diagrams.
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test with various diagram types
-5. Submit a pull request
-
-## License
-
-ISC License - see package.json for details.
-
-## Support
-
-For issues or questions, please open an issue on GitHub or contact the maintainer.
+1. **Node IDs:** Alphanumeric + underscores
+2. **Arrows:** `-->` / `---`
+3. **Direction:** TD, LR, RL, BT
+4. **Grid:** Rounded coordinates
+5. **Unique IDs:** For Draw.io nodes
 
 ---
 
-**Note**: This tool is optimized for flowchart generation with professional layouts. For simple diagrams, Draw.io's native import may suffice, but this tool excels in automation and complex graph handling.
+## ⚠️ Limitations
+
+- Complex Mermaid styles may not convert 1:1 to Draw.io.
+- Some features require breaking chained arrows for clarity.
+
+---
+
+## 🛠️ Troubleshooting
+
+> **Tip:** Use `validate` before converting!
+
+- Node.js/npm errors? Run `npm install` again.
+- Mermaid syntax? Check with the `validate` command.
+- Layout issues? Try simplifying diagrams.
+
+---
+
+## 🤝 Contributing
+
+1. Fork project
+2. Branch + code
+3. Test diagrams
+4. PR 🚀
+
+---
+
+## 📄 License
+
+**ISC License** — see `package.json`
+
+---
+
+## 💬 Support
+
+Open a GitHub issue or contact the maintainer.
+
+---
+
+> **Note**: Optimized for automated, professional flowcharts. For basic diagrams, Draw.io import may suffice, but this tool is tailored for CI/CD and complex workflows!
