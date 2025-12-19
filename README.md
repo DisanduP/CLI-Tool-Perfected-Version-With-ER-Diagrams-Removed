@@ -108,7 +108,7 @@ node diagram-cli.js to-drawio flowchart.mmd -o flowchart.drawio
 node diagram-cli.js to-markdown sequence.mmd -o sequence-docs.md
 
 # Full conversion with all outputs
-node diagram-cli.js convert er-diagram.mmd -d ./output
+node diagram-cli.js convert flowchart.mmd -d ./output
 
 # Validate before conversion
 node diagram-cli.js validate diagram.mmd --json
@@ -149,16 +149,18 @@ sequenceDiagram
     B-->>A: Response
 ```
 
-### ER Diagrams
+### Mindmaps
 
 ```mermaid
-erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    ORDER ||--|{ LINE-ITEM : contains
-    CUSTOMER {
-        string name
-        string email
-    }
+mindmap
+  root((Main Topic))
+    Branch 1
+      Subtopic 1.1
+      Subtopic 1.2
+    Branch 2
+      Subtopic 2.1
+      Subtopic 2.2
+        Detail 2.2.1
 ```
 
 ## Output Formats
@@ -186,7 +188,6 @@ diagram-cli.js          # Main CLI interface
 mermaid-parser.js       # Mermaid syntax parser
 drawio-converter.js     # Draw.io XML generator with Dagre layout
 markdown-converter.js   # Markdown documentation generator
-er-converter.js         # ER diagram support
 index.js               # Entry point
 package.json           # Dependencies
 ```
