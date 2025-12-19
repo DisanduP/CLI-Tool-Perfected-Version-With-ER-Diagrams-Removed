@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "commander": "^14.0.2",
+    "dagre": "^0.8.5"
+  }
+}
